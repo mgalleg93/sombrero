@@ -1,0 +1,166 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ContentSection from "../../components/ContentSection.astro";
+import CTASection from "../../components/CTASection.astro";
+import FAQSection from "../../components/FAQSection.astro";
+import PageHero from "../../components/PageHero.astro";
+import ServiceAreaList from "../../components/ServiceAreaList.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import { business } from "../../data/business";
+import { services, type ServiceData } from "../../data/services";
+import { getCitiesBySlugs, getServicesBySlugs } from "../../utils/content";
+import { getBreadcrumbSchema, getFaqSchema, getServiceSchema } from "../../utils/schema";
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props as { service: ServiceData };
+
+const relatedServices = getServicesBySlugs(service.relatedServiceSlugs).filter(
+  (item): item is ServiceData => Boolean(item) && item.slug !== service.slug,
+);
+
+const relatedCities = getCitiesBySlugs(service.applicableCitySlugs);
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services/" },
+  { label: service.name },
+];
+
+const schemas = [
+  getServiceSchema(service),
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services/" },
+    { name: service.name, path: `/services/${service.slug}/` },
+  ]),
+  getFaqSchema(service.faqs),
+];
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonicalPath={`/services/${service.slug}/`}
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Residential Service"
+    title={service.heroTitle}
+    subtitle={service.heroSubtitle}
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <p class="section-lead">{service.intro}</p>
+
+    <div class="grid grid-2">
+      <article class="card">
+        <h2>What&apos;s Included</h2>
+        <ul class="list-check">
+          {service.whatsIncluded.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Benefits for Your Home</h2>
+        <ul class="list-check">
+          {service.benefits.map((benefit) => (
+            <li>{benefit}</li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Why This Matters in Phoenix Metro" alternate={true}>
+    <article class="card">
+      <p>{service.localWhyItMatters}</p>
+    </article>
+  </ContentSection>
+
+  <ContentSection title="Our Process">
+    <ol class="process-grid">
+      {service.process.map((step) => (
+        <li class="card">
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </li>
+      ))}
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Areas We Serve for This Service" alternate={true}>
+    <ServiceAreaList citySlugs={relatedCities.map((city) => city.slug)} />
+  </ContentSection>
+
+  <ContentSection title="Related Services">
+    <div class="grid grid-2">
+      {relatedServices.map((relatedService) => (
+        <ServiceCard service={relatedService} />
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection>
+    <FAQSection faqs={service.faqs} title={`${service.name} FAQs`} />
+  </ContentSection>
+
+  <CTASection
+    title="Ready to Schedule Your Free Estimate?"
+    text="Talk with our team about your home, your timeline, and the best plan for a clean, durable finish."
+    primaryLabel="Request an Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>
+
+<style>
+  .process-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    counter-reset: process-step;
+  }
+
+  .process-grid li {
+    position: relative;
+    padding-top: 2rem;
+  }
+
+  .process-grid li::before {
+    counter-increment: process-step;
+    content: counter(process-step);
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    width: 1.45rem;
+    height: 1.45rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #d9e8f5;
+    color: #123556;
+    font-weight: 700;
+    font-size: 0.86rem;
+  }
+
+  @media (max-width: 780px) {
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

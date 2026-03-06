@@ -1,0 +1,93 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CTASection from "../components/CTASection.astro";
+import ContentSection from "../components/ContentSection.astro";
+import PageHero from "../components/PageHero.astro";
+import ServiceAreaList from "../components/ServiceAreaList.astro";
+import { business } from "../data/business";
+import { servicePageLinks } from "../data/navigation";
+import { getBreadcrumbSchema } from "../utils/schema";
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "About" },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="About Sombrero Painting | Family-Owned Residential Painter"
+  description="Learn about Sombrero Painting, a family-owned residential painting company serving Phoenix and Glendale, AZ."
+  canonicalPath="/about/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="About Us"
+    title="Family-Owned Residential Painting"
+    subtitle="Professional workmanship, straightforward service, and respect for your home."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <div class="grid grid-2">
+      <article class="card">
+        <h2>Who We Are</h2>
+        <p>
+          Sombrero Painting is a local, family-owned painting company focused on residential homes. We believe quality work starts
+          with clear communication, careful prep, and follow-through on every project.
+        </p>
+      </article>
+
+      <article class="card">
+        <h2>How We Work</h2>
+        <ul class="list-check">
+          <li>Show up on schedule and communicate clearly</li>
+          <li>Protect floors, furniture, and surrounding surfaces</li>
+          <li>Focus on clean detail work and lasting finishes</li>
+          <li>Leave your home clean at the end of each day</li>
+        </ul>
+      </article>
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    title="Residential Focus"
+    lead="We are built for homeowners, not commercial projects."
+    alternate={true}
+  >
+    <article class="card">
+      <p>
+        Our team works on both custom homes and tract homes, with painting plans tailored to each property type. Whether your goal
+        is curb appeal, interior refresh, or cabinet updates, we keep the process practical and homeowner-friendly.
+      </p>
+    </article>
+  </ContentSection>
+
+  <ContentSection title="Our Core Services">
+    <div class="btn-row">
+      {servicePageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Areas We Serve" alternate={true}>
+    <ServiceAreaList />
+  </ContentSection>
+
+  <CTASection
+    title="Plan Your Next Painting Project"
+    text="Call or request a free estimate to discuss your home and project priorities."
+    primaryLabel="Get Free Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

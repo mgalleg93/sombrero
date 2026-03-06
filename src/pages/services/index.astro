@@ -1,0 +1,67 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import CTASection from "../../components/CTASection.astro";
+import ContentSection from "../../components/ContentSection.astro";
+import PageHero from "../../components/PageHero.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { business } from "../../data/business";
+import { cityPageLinks } from "../../data/navigation";
+import { services } from "../../data/services";
+import { getBreadcrumbSchema } from "../../utils/schema";
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Services" },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Residential Painting Services in Phoenix & Glendale | Sombrero Painting"
+  description="Explore interior painting, exterior painting, cabinet painting, and custom or tract home services from Sombrero Painting."
+  canonicalPath="/services/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Services"
+    title="Residential Painting Services"
+    subtitle="Professional painting for Phoenix and Glendale homeowners."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <div class="grid grid-2">
+      {services.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    title="Need a City-Specific Painter?"
+    lead="View our local service pages for current Arizona cities we serve."
+    alternate={true}
+  >
+    <div class="btn-row">
+      {cityPageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <CTASection
+    title="Not Sure Which Service Fits Your Project?"
+    text="Call us for a quick conversation. We can help you choose the right approach for your home and timeline."
+    primaryLabel="Request an Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

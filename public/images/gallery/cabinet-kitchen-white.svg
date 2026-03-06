@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Kitchen cabinet refinishing</title>
+  <desc id="desc">Placeholder for cabinet painting photo</desc>
+  <rect width="1200" height="750" fill="#f4f6f8" />
+  <rect x="120" y="180" width="960" height="380" rx="18" fill="#ffffff" />
+  <rect x="170" y="230" width="250" height="280" fill="#fefefe" stroke="#d7dee6" />
+  <rect x="475" y="230" width="250" height="280" fill="#fefefe" stroke="#d7dee6" />
+  <rect x="780" y="230" width="250" height="280" fill="#fefefe" stroke="#d7dee6" />
+  <text x="150" y="670" fill="#214a6e" font-size="40" font-family="Source Sans 3, sans-serif" font-weight="700">Cabinet Painting - White Finish</text>
+</svg>

@@ -1,0 +1,59 @@
+---
+import SEOHead from "../components/SEOHead.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { getLocalBusinessSchema } from "../utils/schema";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  image?: string;
+  imageAlt?: string;
+  noIndex?: boolean;
+  type?: "website" | "article";
+  schemas?: unknown[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  image,
+  imageAlt,
+  noIndex = false,
+  type = "website",
+  schemas = [],
+} = Astro.props;
+
+const pageSchemas = [getLocalBusinessSchema(), ...schemas];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#123b61" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEOHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      image={image}
+      imageAlt={imageAlt}
+      noIndex={noIndex}
+      type={type}
+      schemas={pageSchemas}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <SiteHeader />
+    <main id="main-content">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

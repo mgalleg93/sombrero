@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Sombrero Painting</title>
+  <desc id="desc">Residential painting in Phoenix and Glendale, Arizona</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#113a61" />
+      <stop offset="100%" stop-color="#0b2741" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect x="60" y="60" width="1080" height="510" rx="24" fill="#ffffff" opacity="0.08" />
+  <text x="100" y="280" fill="#ffffff" font-size="64" font-family="Merriweather, Georgia, serif" font-weight="700">Sombrero Painting</text>
+  <text x="100" y="350" fill="#dfeaf6" font-size="36" font-family="Source Sans 3, Segoe UI, sans-serif">Residential Painting in Phoenix and Glendale, AZ</text>
+</svg>

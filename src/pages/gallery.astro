@@ -1,0 +1,86 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CTASection from "../components/CTASection.astro";
+import ContentSection from "../components/ContentSection.astro";
+import GalleryGrid from "../components/GalleryGrid.astro";
+import PageHero from "../components/PageHero.astro";
+import { business } from "../data/business";
+import { galleryItems } from "../data/gallery";
+import { cityPageLinks, servicePageLinks } from "../data/navigation";
+import { getBreadcrumbSchema } from "../utils/schema";
+
+const interiorItems = galleryItems.filter((item) => item.category === "interior");
+const exteriorItems = galleryItems.filter((item) => item.category === "exterior");
+const cabinetItems = galleryItems.filter((item) => item.category === "cabinets");
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Gallery" },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Gallery", path: "/gallery/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Painting Gallery | Sombrero Painting"
+  description="Browse interior, exterior, and cabinet painting examples from residential projects in Phoenix and Glendale."
+  canonicalPath="/gallery/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Project Gallery"
+    title="Residential Painting Gallery"
+    subtitle="A growing portfolio of interior, exterior, and cabinet painting projects."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <p class="section-lead">
+      This gallery is structured for easy expansion as new project photos are added. Replace placeholder images with real project
+      photography over time.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Interior Painting" alternate={true}>
+    <GalleryGrid items={interiorItems} />
+  </ContentSection>
+
+  <ContentSection title="Exterior Painting">
+    <GalleryGrid items={exteriorItems} />
+  </ContentSection>
+
+  <ContentSection title="Cabinet Painting" alternate={true}>
+    <GalleryGrid items={cabinetItems} />
+  </ContentSection>
+
+  <ContentSection
+    title="Explore Related Pages"
+    lead="Learn more about the services behind these projects and where we currently work."
+  >
+    <div class="btn-row">
+      {servicePageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+    <div class="btn-row" style="margin-top: 0.8rem;">
+      {cityPageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <CTASection
+    title="Want Results Like These in Your Home?"
+    text="Request your free estimate today for interior, exterior, or cabinet painting in Phoenix and Glendale."
+    primaryLabel="Get Free Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

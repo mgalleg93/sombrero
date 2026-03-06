@@ -1,0 +1,113 @@
+---
+import CTASection from "../components/CTASection.astro";
+import ContentSection from "../components/ContentSection.astro";
+import GalleryGrid from "../components/GalleryGrid.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ReviewGrid from "../components/ReviewGrid.astro";
+import ServiceAreaList from "../components/ServiceAreaList.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TrustIndicators from "../components/TrustIndicators.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { business } from "../data/business";
+import { featuredReviewIds, reviews } from "../data/reviews";
+import { galleryItems } from "../data/gallery";
+import { services } from "../data/services";
+
+const featuredReviews = reviews.filter((review) => featuredReviewIds.includes(review.id));
+const previewGalleryItems = galleryItems.slice(0, 6);
+---
+
+<BaseLayout
+  title="Residential Painter Phoenix AZ | Sombrero Painting"
+  description="Sombrero Painting is a family-owned residential painter serving Phoenix and Glendale with interior, exterior, and cabinet painting. Free estimates."
+  canonicalPath="/"
+>
+  <HeroSection
+    eyebrow="Sombrero Painting • Phoenix & Glendale, AZ"
+    title="Residential Painting Done Right for Phoenix-Area Homes"
+    subtitle="Trusted local painters for interior painting, exterior painting, cabinet painting, and custom or tract home projects."
+    primaryLabel={`Call Now ${business.phoneDisplay}`}
+    primaryHref={`tel:${business.phoneHref}`}
+    secondaryLabel="Get Free Estimate"
+    secondaryHref="/contact/"
+    highlights={[
+      "5-star local feedback from homeowners",
+      "Residential specialists for occupied homes",
+      "Free, no-pressure estimates",
+      "Family-owned and service-focused",
+    ]}
+  />
+
+  <ContentSection title="Trusted by Local Homeowners" lead="Professional service, straightforward communication, and reliable results.">
+    <TrustIndicators />
+  </ContentSection>
+
+  <ContentSection
+    id="services"
+    title="Residential Painting Services"
+    lead="Explore our core services for Phoenix and Glendale homes."
+    alternate={true}
+  >
+    <div class="grid grid-2">
+      {services.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection
+    title="Why Homeowners Choose Sombrero Painting"
+    lead="We focus on craftsmanship, reliability, and respect for your home from day one."
+  >
+    <div class="grid grid-2">
+      <article class="card">
+        <h3>Dependable project experience</h3>
+        <ul class="list-check">
+          <li>Clear estimates with no confusing scope gaps</li>
+          <li>Consistent communication throughout the project</li>
+          <li>On-time crews who keep work areas clean</li>
+          <li>Detailed walkthrough before project closeout</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Built for Arizona homes</h3>
+        <ul class="list-check">
+          <li>Exterior prep for stucco and heat-exposed surfaces</li>
+          <li>Interior finish choices for bright natural light</li>
+          <li>Paint plans that fit custom and tract-home needs</li>
+          <li>Residential-only focus for homeowner priorities</li>
+        </ul>
+      </article>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Featured Reviews" lead="A few recent examples of what homeowners say about working with us." alternate={true}>
+    <ReviewGrid reviews={featuredReviews} />
+    <p class="kicker" style="margin-top: 1rem;">
+      <a href="/reviews/">Read all reviews</a>
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Service Areas" lead="We currently serve Phoenix and Glendale homeowners.">
+    <ServiceAreaList />
+    <p class="kicker" style="margin-top: 1rem;">
+      <a href="/service-areas/">View full service area page</a>
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Recent Project Gallery" lead="Browse examples of interior, exterior, and cabinet painting work." alternate={true}>
+    <GalleryGrid items={previewGalleryItems} />
+    <p class="kicker" style="margin-top: 1rem;">
+      <a href="/gallery/">View full gallery</a>
+    </p>
+  </ContentSection>
+
+  <CTASection
+    title="Ready for a Free Painting Estimate?"
+    text="Call us today or request an estimate online. We provide residential painting services in Phoenix and Glendale, AZ."
+    primaryLabel="Get Free Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

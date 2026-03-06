@@ -1,0 +1,59 @@
+---
+import type { ServiceData } from "../data/services";
+
+interface Props {
+  service: ServiceData;
+}
+
+const { service } = Astro.props;
+---
+
+<article class="card service-card">
+  <h3>
+    <a href={`/services/${service.slug}/`}>{service.name}</a>
+  </h3>
+  <p>{service.shortDescription}</p>
+  <a class="service-link" href={`/services/${service.slug}/`}>Learn more about {service.name}</a>
+</article>
+
+<style>
+  .service-card {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.15rem;
+    min-height: 100%;
+    border-top: 4px solid #dbe8f3;
+  }
+
+  .service-card h3 {
+    margin-bottom: 0.46rem;
+  }
+
+  .service-card h3 a {
+    text-decoration: none;
+    color: #123253;
+  }
+
+  .service-card h3 a:hover {
+    color: #0b2c4b;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.02rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .service-link::after {
+    content: "->";
+    transition: transform 140ms ease;
+  }
+
+  .service-link:hover::after {
+    transform: translateX(3px);
+  }
+</style>

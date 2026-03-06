@@ -1,0 +1,91 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  highlights?: string[];
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  highlights = [],
+} = Astro.props;
+---
+
+<section class="section hero">
+  <div class="container split hero-wrap">
+    <div class="hero-content">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      <p class="section-lead hero-lead">{subtitle}</p>
+      <div class="btn-row hero-actions">
+        <a class="btn btn-primary" href={primaryHref}>{primaryLabel}</a>
+        {secondaryLabel && secondaryHref && (
+          <a class="btn btn-secondary" href={secondaryHref}>{secondaryLabel}</a>
+        )}
+      </div>
+    </div>
+
+    <aside class="panel hero-panel">
+      <p class="badge">Trusted Local Service</p>
+      <h2>Why homeowners call us</h2>
+      {highlights.length > 0 ? (
+        <ul class="list-check">
+          {highlights.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Professional residential painting with clear communication and respectful crews.</p>
+      )}
+    </aside>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(3.1rem, 6vw, 5.3rem);
+    background: radial-gradient(circle at 15% 12%, #e4eef7 0, transparent 52%),
+      radial-gradient(circle at 88% 10%, #edf3f8 0, transparent 48%);
+  }
+
+  .hero-wrap {
+    align-items: center;
+  }
+
+  .hero-content h1 {
+    max-width: 19ch;
+    margin-bottom: 0.82rem;
+  }
+
+  .hero-lead {
+    max-width: 60ch;
+  }
+
+  .hero-actions {
+    margin-top: 0.2rem;
+  }
+
+  .hero-panel {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .hero-panel .badge {
+    justify-self: start;
+  }
+
+  .hero-panel .list-check {
+    margin-top: 0.72rem;
+  }
+</style>

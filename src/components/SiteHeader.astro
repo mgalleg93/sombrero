@@ -1,0 +1,277 @@
+---
+import { business } from "../data/business";
+import { primaryNav } from "../data/navigation";
+
+const pathname = Astro.url.pathname;
+
+const isActive = (href: string) => {
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname.startsWith(href);
+};
+---
+
+<header class="site-header">
+  <div class="container header-row">
+    <a href="/" class="brand" aria-label="Sombrero Painting Home">
+      <span class="brand-mark" aria-hidden="true">SP</span>
+      <span class="brand-copy">
+        <span class="brand-name">Sombrero Painting</span>
+        <span class="brand-tag">Residential Painting in Phoenix Metro</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary">
+      <ul>
+        {primaryNav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class={isActive(item.href) ? "active" : undefined}
+              aria-current={isActive(item.href) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="phone-link" href={`tel:${business.phoneHref}`} aria-label={`Call ${business.name} at ${business.phoneDisplay}`}>
+        {business.phoneDisplay}
+      </a>
+      <a class="btn btn-primary header-cta" href="/contact/">Get Free Estimate</a>
+    </div>
+
+    <details class="mobile-nav-wrap">
+      <summary aria-label="Open menu">Menu</summary>
+      <nav aria-label="Mobile">
+        <ul>
+          {primaryNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class={isActive(item.href) ? "active" : undefined}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="mobile-cta-row">
+          <a class="btn btn-primary btn-block" href="/contact/">Get Free Estimate</a>
+          <a class="phone-link mobile-phone" href={`tel:${business.phoneHref}`}>
+            Call {business.phoneDisplay}
+          </a>
+        </div>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 120;
+    background: rgb(255 255 255 / 96%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 2px 16px rgb(10 29 46 / 5%);
+  }
+
+  .header-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1.2rem;
+    min-height: 5.35rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.72rem;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.45rem;
+    height: 2.45rem;
+    border-radius: 0.72rem;
+    border: 1px solid #25557d;
+    background: linear-gradient(150deg, #174b78 0%, #133d62 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.91rem;
+    letter-spacing: 0.045em;
+  }
+
+  .brand-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.06rem;
+    line-height: 1.12;
+  }
+
+  .brand-name {
+    font-family: "Merriweather", Georgia, serif;
+    font-size: 1.05rem;
+    color: #0d2841;
+    font-weight: 700;
+  }
+
+  .brand-tag {
+    font-size: 0.76rem;
+    color: var(--color-muted);
+    letter-spacing: 0.015em;
+  }
+
+  .desktop-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+
+  .desktop-nav a {
+    text-decoration: none;
+    color: #1a3550;
+    font-weight: 700;
+    font-size: 0.93rem;
+    letter-spacing: 0.01em;
+    padding: 0.24rem 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .desktop-nav a.active,
+  .desktop-nav a:hover {
+    color: #0e2f4d;
+    border-bottom-color: var(--color-accent);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .header-cta {
+    min-height: 2.55rem;
+    padding-inline: 1.05rem;
+  }
+
+  .phone-link {
+    text-decoration: none;
+    font-weight: 700;
+    color: #0d3557;
+    white-space: nowrap;
+    border: 1px solid #c4d5e5;
+    border-radius: 999px;
+    padding: 0.47rem 0.82rem;
+    background: #f5f9fc;
+  }
+
+  .phone-link:hover {
+    border-color: #9cb8d1;
+    background: #edf4fa;
+  }
+
+  .mobile-nav-wrap {
+    display: none;
+  }
+
+  @media (max-width: 1024px) {
+    .desktop-nav,
+    .header-actions {
+      display: none;
+    }
+
+    .header-row {
+      grid-template-columns: 1fr auto;
+      min-height: 5rem;
+    }
+
+    .mobile-nav-wrap {
+      display: block;
+      justify-self: end;
+      position: relative;
+    }
+
+    .mobile-nav-wrap summary {
+      list-style: none;
+      cursor: pointer;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      padding: 0.5rem 0.95rem;
+      font-weight: 700;
+      color: #17364f;
+      background: #fff;
+    }
+
+    .mobile-nav-wrap[open] nav {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.5rem);
+      min-width: 17rem;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: 0.95rem;
+      padding: 0.95rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-nav-wrap nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.24rem;
+    }
+
+    .mobile-nav-wrap nav a {
+      display: block;
+      text-decoration: none;
+      color: #1a344c;
+      font-weight: 700;
+      padding: 0.48rem 0.4rem;
+      border-radius: 0.45rem;
+    }
+
+    .mobile-nav-wrap nav a.active,
+    .mobile-nav-wrap nav a:hover {
+      background: #edf4fa;
+      color: #0d2f4b;
+    }
+
+    .mobile-cta-row {
+      display: grid;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+
+    .mobile-phone {
+      display: block;
+      text-align: center;
+      border-color: #90afca;
+      background: #f6fbff;
+      padding: 0.58rem 0.85rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .brand-tag {
+      display: none;
+    }
+  }
+</style>

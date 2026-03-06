@@ -1,0 +1,62 @@
+---
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ContentSection from "../../components/ContentSection.astro";
+import PageHero from "../../components/PageHero.astro";
+import ServiceAreaList from "../../components/ServiceAreaList.astro";
+import CTASection from "../../components/CTASection.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { business } from "../../data/business";
+import { servicePageLinks } from "../../data/navigation";
+import { getBreadcrumbSchema } from "../../utils/schema";
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Service Areas" },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Service Areas", path: "/service-areas/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Service Areas | Residential Painting in Phoenix & Glendale"
+  description="Sombrero Painting serves residential homeowners in Phoenix and Glendale, AZ with interior, exterior, and cabinet painting services."
+  canonicalPath="/service-areas/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Service Areas"
+    title="Residential Painting Service Areas"
+    subtitle="We currently serve homeowners in Phoenix and Glendale, Arizona."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <p class="section-lead">
+      Our service area is focused on Phoenix metro homeowners so we can deliver responsive scheduling and consistent quality.
+      We plan to expand to additional nearby communities over time.
+    </p>
+    <ServiceAreaList />
+  </ContentSection>
+
+  <ContentSection title="Services Available in Each City" alternate={true}>
+    <div class="btn-row">
+      {servicePageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <CTASection
+    title="Check Availability for Your Home"
+    text="Call or request an estimate to confirm scheduling for your project in Phoenix or Glendale."
+    primaryLabel="Get Free Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import ContentSection from "../../components/ContentSection.astro";
+import CTASection from "../../components/CTASection.astro";
+import FAQSection from "../../components/FAQSection.astro";
+import PageHero from "../../components/PageHero.astro";
+import ReviewGrid from "../../components/ReviewGrid.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import { business } from "../../data/business";
+import { cities, type CityData } from "../../data/cities";
+import { reviews } from "../../data/reviews";
+import { type ServiceData } from "../../data/services";
+import { getServicesBySlugs } from "../../utils/content";
+import { getBreadcrumbSchema, getFaqSchema } from "../../utils/schema";
+
+export function getStaticPaths() {
+  return cities.map((city) => ({
+    params: { slug: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props as { city: CityData };
+
+const servicesForCity = getServicesBySlugs(city.serviceSlugs).filter(
+  (item): item is ServiceData => Boolean(item),
+);
+
+const cityReviews = reviews.filter((review) => review.citySlug === city.slug).slice(0, 3);
+const fallbackReviews = reviews.slice(0, 3);
+const visibleReviews = cityReviews.length > 0 ? cityReviews : fallbackReviews;
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Service Areas", href: "/service-areas/" },
+  { label: `${city.name}, AZ` },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Service Areas", path: "/service-areas/" },
+    { name: `${city.name}, AZ`, path: `/service-areas/${city.slug}/` },
+  ]),
+  getFaqSchema(city.faqs),
+];
+---
+
+<BaseLayout
+  title={city.metaTitle}
+  description={city.metaDescription}
+  canonicalPath={`/service-areas/${city.slug}/`}
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="City Service Page"
+    title={city.heroTitle}
+    subtitle={city.heroSubtitle}
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <p class="section-lead">{city.intro}</p>
+
+    <article class="card">
+      <h2>What Homeowners in {city.name} Need</h2>
+      <ul class="list-check">
+        {city.homeownerNeeds.map((need) => (
+          <li>{need}</li>
+        ))}
+      </ul>
+    </article>
+  </ContentSection>
+
+  <ContentSection
+    title={`Residential Painting Services in ${city.name}`}
+    lead={`We provide these services for homeowners throughout ${city.name}, Arizona.`}
+    alternate={true}
+  >
+    <div class="grid grid-2">
+      {servicesForCity.map((service) => (
+        <ServiceCard service={service} />
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection title={`Why ${city.name} Homeowners Choose Sombrero Painting`}>
+    <article class="card">
+      <ul class="list-check">
+        {city.whyChooseUs.map((reason) => (
+          <li>{reason}</li>
+        ))}
+      </ul>
+    </article>
+  </ContentSection>
+
+  <ContentSection
+    title="Local Reviews"
+    lead="Feedback from homeowners who wanted quality workmanship and a professional project experience."
+    alternate={true}
+  >
+    <ReviewGrid reviews={visibleReviews} />
+    <p class="kicker" style="margin-top: 1rem;">
+      <a href="/reviews/">Read all reviews</a>
+    </p>
+  </ContentSection>
+
+  <ContentSection>
+    <FAQSection title={`${city.name} Painting FAQs`} faqs={city.faqs} />
+  </ContentSection>
+
+  <CTASection
+    title={`Need a House Painter in ${city.name}?`}
+    text={`Request your free estimate today. We serve residential homes throughout ${city.name}, AZ with interior, exterior, and cabinet painting.`}
+    primaryLabel="Get Free Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>

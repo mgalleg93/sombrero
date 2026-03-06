@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Interior living room repaint</title>
+  <desc id="desc">Placeholder for interior painting photo</desc>
+  <rect width="1200" height="750" fill="#f2f7fb" />
+  <rect x="90" y="90" width="1020" height="570" rx="24" fill="#dbe9f5" />
+  <rect x="150" y="180" width="390" height="300" rx="18" fill="#ffffff" />
+  <rect x="620" y="210" width="430" height="240" rx="18" fill="#f6fbff" />
+  <text x="150" y="580" fill="#12385d" font-size="42" font-family="Source Sans 3, sans-serif" font-weight="700">Interior Living Room</text>
+</svg>

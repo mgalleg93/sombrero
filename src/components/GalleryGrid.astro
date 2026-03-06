@@ -1,0 +1,57 @@
+---
+import { galleryCategoryLabels, type GalleryItem } from "../data/gallery";
+
+interface Props {
+  items: GalleryItem[];
+  showCategory?: boolean;
+}
+
+const { items, showCategory = true } = Astro.props;
+---
+
+<div class="grid grid-3">
+  {items.map((item) => (
+    <figure class="card gallery-item">
+      <img src={item.src} alt={item.alt} loading="lazy" />
+      <figcaption>
+        <strong>{item.title}</strong>
+        {showCategory && <span>{galleryCategoryLabels[item.category]}</span>}
+      </figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .gallery-item {
+    padding: 0;
+    overflow: hidden;
+    border-top: 4px solid #dbe8f4;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-bottom: 1px solid var(--color-border);
+    transition: transform 220ms ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.02);
+  }
+
+  .gallery-item figcaption {
+    display: grid;
+    gap: 0.24rem;
+    padding: 0.95rem 1rem 1.02rem;
+  }
+
+  .gallery-item strong {
+    color: #133555;
+  }
+
+  .gallery-item span {
+    color: #5c6d7f;
+    font-size: 0.9rem;
+  }
+</style>

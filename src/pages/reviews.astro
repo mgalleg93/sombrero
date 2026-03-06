@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import CTASection from "../components/CTASection.astro";
+import ContentSection from "../components/ContentSection.astro";
+import PageHero from "../components/PageHero.astro";
+import ReviewGrid from "../components/ReviewGrid.astro";
+import { business } from "../data/business";
+import { cityPageLinks, servicePageLinks } from "../data/navigation";
+import { reviews } from "../data/reviews";
+import { getBreadcrumbSchema, getReviewSchema } from "../utils/schema";
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Reviews" },
+];
+
+const schemas = [
+  getReviewSchema(reviews),
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Reviews", path: "/reviews/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Customer Reviews | Sombrero Painting"
+  description="Read 5-star feedback from Phoenix and Glendale homeowners who hired Sombrero Painting for residential painting projects."
+  canonicalPath="/reviews/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Customer Feedback"
+    title="Trusted by Local Homeowners"
+    subtitle="Real reviews from residential clients across Phoenix and Glendale, AZ."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <div class="panel review-summary">
+      <h2>5.0-Star Local Rating</h2>
+      <p>
+        We currently have <strong>{business.reviewCount} five-star reviews</strong> from residential painting clients in Phoenix and
+        Glendale.
+      </p>
+      <p class="stars" aria-hidden="true"></p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="What Homeowners Are Saying" alternate={true}>
+    <ReviewGrid reviews={reviews} />
+  </ContentSection>
+
+  <ContentSection title="Related Service Pages" lead="Browse service details and city pages referenced by homeowners.">
+    <div class="btn-row">
+      {servicePageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+    <div class="btn-row" style="margin-top: 0.8rem;">
+      {cityPageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <CTASection
+    title="Get the Same Professional Experience"
+    text="If you need a dependable house painter in Phoenix or Glendale, request your free estimate today."
+    primaryLabel="Request Estimate"
+    primaryHref="/contact/"
+    secondaryLabel={`Call ${business.phoneDisplay}`}
+    secondaryHref={`tel:${business.phoneHref}`}
+  />
+</BaseLayout>
+
+<style>
+  .review-summary {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .review-summary h2,
+  .review-summary p {
+    margin: 0;
+  }
+
+  .stars::before {
+    content: "\2605\2605\2605\2605\2605";
+    display: inline-block;
+    margin-top: 0.4rem;
+    letter-spacing: 0.18em;
+    color: #ffdb7a;
+    font-size: 1.2rem;
+  }
+</style>

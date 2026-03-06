@@ -1,0 +1,67 @@
+---
+import { cities } from "../data/cities";
+
+interface Props {
+  citySlugs?: string[];
+}
+
+const { citySlugs } = Astro.props;
+const visibleCities = citySlugs?.length
+  ? cities.filter((city) => citySlugs.includes(city.slug))
+  : cities;
+---
+
+<ul class="service-area-list">
+  {visibleCities.map((city) => (
+    <li class="card area-card">
+      <h3>
+        <a href={`/service-areas/${city.slug}/`}>{city.name}, AZ</a>
+      </h3>
+      <p>{city.intro}</p>
+      <a class="service-link" href={`/service-areas/${city.slug}/`}>View {city.name} page</a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .service-area-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area-card {
+    border-top: 4px solid #dbe8f3;
+  }
+
+  .service-area-list h3 {
+    margin-bottom: 0.55rem;
+  }
+
+  .service-area-list h3 a {
+    color: #123253;
+    text-decoration: none;
+  }
+
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .service-link::after {
+    content: "->";
+  }
+
+  @media (max-width: 760px) {
+    .service-area-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

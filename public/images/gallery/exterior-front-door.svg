@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Front entry transformation</title>
+  <desc id="desc">Placeholder for exterior front door painting photo</desc>
+  <rect width="1200" height="750" fill="#edf2f7" />
+  <rect x="120" y="140" width="960" height="470" rx="20" fill="#f5f7fb" />
+  <rect x="520" y="220" width="160" height="340" fill="#113a61" />
+  <rect x="320" y="230" width="150" height="150" fill="#ffffff" />
+  <rect x="730" y="230" width="150" height="150" fill="#ffffff" />
+  <text x="150" y="680" fill="#224869" font-size="40" font-family="Source Sans 3, sans-serif" font-weight="700">Exterior Front Entry</text>
+</svg>

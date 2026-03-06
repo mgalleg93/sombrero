@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Stucco exterior repaint</title>
+  <desc id="desc">Placeholder for exterior stucco painting photo</desc>
+  <rect width="1200" height="750" fill="#eef3f8" />
+  <rect x="0" y="520" width="1200" height="230" fill="#d9c2a8" />
+  <rect x="180" y="220" width="840" height="360" rx="18" fill="#f8f4ef" />
+  <rect x="250" y="290" width="180" height="140" fill="#ffffff" />
+  <rect x="770" y="290" width="180" height="140" fill="#ffffff" />
+  <text x="150" y="680" fill="#264764" font-size="40" font-family="Source Sans 3, sans-serif" font-weight="700">Exterior Stucco Home</text>
+</svg>

@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ContactForm from "../components/ContactForm.astro";
+import ContentSection from "../components/ContentSection.astro";
+import PageHero from "../components/PageHero.astro";
+import ServiceAreaList from "../components/ServiceAreaList.astro";
+import { business } from "../data/business";
+import { servicePageLinks } from "../data/navigation";
+import { getBreadcrumbSchema } from "../utils/schema";
+
+const breadcrumbItems = [
+  { label: "Home", href: "/" },
+  { label: "Contact" },
+];
+
+const schemas = [
+  getBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact/" },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Contact Sombrero Painting | Free Residential Painting Estimate"
+  description="Contact Sombrero Painting for a free estimate on interior, exterior, and cabinet painting in Phoenix and Glendale, AZ."
+  canonicalPath="/contact/"
+  schemas={schemas}
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Request Your Free Estimate"
+    subtitle="Residential painting in Phoenix and Glendale, AZ."
+  />
+
+  <ContentSection>
+    <Breadcrumbs items={breadcrumbItems} />
+    <div class="grid grid-2 contact-layout">
+      <aside class="card contact-card">
+        <h2>Talk With Our Team</h2>
+        <p>
+          Reach out by phone for faster scheduling, or send your project details through the estimate form.
+        </p>
+        <p>
+          <strong>Phone:</strong><br />
+          <a href={`tel:${business.phoneHref}`}>{business.phoneDisplay}</a>
+        </p>
+        <p>
+          <strong>Email:</strong><br />
+          <a href={`mailto:${business.email}`}>{business.email}</a>
+        </p>
+        <p class="kicker">
+          Free estimates. Residential-only painting for custom homes and tract homes.
+        </p>
+      </aside>
+
+      <ContactForm />
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Explore Services Before You Book" lead="Use these pages to compare service details before requesting your estimate.">
+    <div class="btn-row">
+      {servicePageLinks.map((link) => (
+        <a class="btn btn-secondary" href={link.href}>{link.label}</a>
+      ))}
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Current Service Areas" alternate={true}>
+    <ServiceAreaList />
+  </ContentSection>
+</BaseLayout>
+
+<style>
+  .contact-card {
+    align-self: start;
+  }
+
+  .contact-card p {
+    margin-bottom: 1rem;
+  }
+
+  .contact-card p:last-child {
+    margin-bottom: 0;
+  }
+</style>

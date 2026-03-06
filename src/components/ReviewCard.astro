@@ -1,0 +1,53 @@
+---
+import type { ReviewData } from "../data/reviews";
+
+interface Props {
+  review: ReviewData;
+}
+
+const { review } = Astro.props;
+const stars = "\u2605".repeat(review.rating);
+---
+
+<article class="card review-card">
+  <p class="stars" aria-label={`${review.rating} out of 5 stars`}>{stars}</p>
+  <blockquote>
+    <p>"{review.text}"</p>
+  </blockquote>
+  <p class="review-author">{review.name} | {review.city}</p>
+</article>
+
+<style>
+  .review-card {
+    display: grid;
+    gap: 0.68rem;
+    border-top: 4px solid #e7d2b7;
+  }
+
+  .stars {
+    margin: 0;
+    color: #b97742;
+    font-size: 1rem;
+    letter-spacing: 0.11em;
+    font-weight: 700;
+  }
+
+  blockquote {
+    margin: 0;
+    color: #274057;
+    font-style: italic;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  .review-author {
+    margin: 0;
+    color: #3f5770;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>

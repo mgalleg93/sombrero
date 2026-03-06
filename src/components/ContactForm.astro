@@ -1,0 +1,78 @@
+---
+import { cities } from "../data/cities";
+import { services } from "../data/services";
+---
+
+<form class="card contact-form" method="post" action="/contact/" aria-describedby="estimate-note">
+  <p id="estimate-note" class="kicker form-note">
+    Free estimates for residential painting in Phoenix and Glendale. Form backend can be connected later.
+  </p>
+
+  <div class="grid grid-2">
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" autocomplete="name" required />
+    </div>
+
+    <div class="field">
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" required />
+    </div>
+
+    <div class="field">
+      <label for="city">City</label>
+      <select id="city" name="city" autocomplete="address-level2" required>
+        <option value="">Select your city</option>
+        {cities.map((city) => (
+          <option value={city.name}>{city.name}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="field">
+      <label for="service-needed">Service Needed</label>
+      <select id="service-needed" name="serviceNeeded" required>
+        <option value="">Select a service</option>
+        {services.map((service) => (
+          <option value={service.name}>{service.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="timeline">Preferred Timeline</label>
+      <input id="timeline" name="timeline" type="text" placeholder="Example: Next 2-4 weeks" />
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required placeholder="Tell us about your home, project scope, and any priorities."></textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Request Free Estimate</button>
+</form>
+
+<style>
+  .contact-form {
+    border-top: 4px solid #dbe8f4;
+  }
+
+  .form-note {
+    margin-bottom: 1rem;
+    font-size: 0.98rem;
+  }
+
+  .contact-form button {
+    margin-top: 0.2rem;
+  }
+</style>

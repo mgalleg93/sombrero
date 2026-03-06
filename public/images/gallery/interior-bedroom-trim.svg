@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="title desc">
+  <title id="title">Bedroom and trim refresh</title>
+  <desc id="desc">Placeholder for interior bedroom painting photo</desc>
+  <rect width="1200" height="750" fill="#f7fafc" />
+  <rect x="110" y="120" width="980" height="500" rx="22" fill="#dbe4ef" />
+  <rect x="200" y="240" width="300" height="290" rx="14" fill="#ffffff" />
+  <rect x="570" y="210" width="420" height="330" rx="14" fill="#eef3f8" />
+  <text x="140" y="670" fill="#1b3b59" font-size="40" font-family="Source Sans 3, sans-serif" font-weight="700">Interior Bedroom Trim</text>
+</svg>

@@ -1,0 +1,98 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+const {
+  title,
+  text,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+} = Astro.props;
+---
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="panel cta-panel">
+      <div>
+        <p class="eyebrow cta-eyebrow">Free Residential Estimates</p>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="btn-row cta-actions">
+        <a class="btn cta-primary" href={primaryHref}>{primaryLabel}</a>
+        {secondaryLabel && secondaryHref && <a class="btn cta-secondary" href={secondaryHref}>{secondaryLabel}</a>}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-top: clamp(3rem, 4.8vw, 4.5rem);
+  }
+
+  .cta-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+  }
+
+  .cta-panel p {
+    max-width: 60ch;
+  }
+
+  .cta-eyebrow {
+    color: #c6dff5;
+    margin-bottom: 0.58rem;
+  }
+
+  .cta-actions {
+    justify-content: flex-end;
+    min-width: min(23.5rem, 100%);
+  }
+
+  .cta-primary {
+    background: #fff;
+    color: #113a5f;
+    border-color: #fff;
+  }
+
+  .cta-primary:hover {
+    background: #f3f8fc;
+    color: #0d2f4c;
+  }
+
+  .cta-secondary {
+    background: rgb(255 255 255 / 8%);
+    border-color: rgb(255 255 255 / 52%);
+    color: #f4f9ff;
+  }
+
+  .cta-secondary:hover {
+    background: rgb(255 255 255 / 16%);
+    border-color: rgb(255 255 255 / 72%);
+    color: #fff;
+  }
+
+  @media (max-width: 900px) {
+    .cta-panel {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cta-actions {
+      width: 100%;
+      min-width: 0;
+      justify-content: flex-start;
+    }
+  }
+</style>
