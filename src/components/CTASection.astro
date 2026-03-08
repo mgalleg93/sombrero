@@ -21,7 +21,7 @@ const {
 <section class="section cta-section">
   <div class="container">
     <div class="panel cta-panel">
-      <div>
+      <div class="cta-copy">
         <p class="eyebrow cta-eyebrow">Free Residential Estimates</p>
         <h2>{title}</h2>
         <p>{text}</p>
@@ -36,14 +36,19 @@ const {
 
 <style>
   .cta-section {
-    padding-top: clamp(3rem, 4.8vw, 4.5rem);
+    padding-top: clamp(3.1rem, 5vw, 4.8rem);
   }
 
   .cta-panel {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.2rem;
+    gap: 1.4rem;
+  }
+
+  .cta-copy h2 {
+    margin-bottom: 0.75rem;
+    max-width: 16ch;
   }
 
   .cta-panel p {
@@ -51,17 +56,17 @@ const {
   }
 
   .cta-eyebrow {
-    color: #c6dff5;
-    margin-bottom: 0.58rem;
+    color: #c7def3;
+    margin-bottom: 0.6rem;
   }
 
   .cta-actions {
     justify-content: flex-end;
-    min-width: min(23.5rem, 100%);
+    min-width: min(24rem, 100%);
   }
 
   .cta-primary {
-    background: #fff;
+    background: linear-gradient(180deg, #fff 0%, #f2f7fb 100%);
     color: #113a5f;
     border-color: #fff;
   }
@@ -87,6 +92,10 @@ const {
     .cta-panel {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .cta-copy h2 {
+      max-width: none;
     }
 
     .cta-actions {

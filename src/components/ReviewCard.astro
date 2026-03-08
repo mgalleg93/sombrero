@@ -6,11 +6,11 @@ interface Props {
 }
 
 const { review } = Astro.props;
-const stars = "\u2605".repeat(review.rating);
+const starsHtml = "&#9733;".repeat(review.rating);
 ---
 
 <article class="card review-card">
-  <p class="stars" aria-label={`${review.rating} out of 5 stars`}>{stars}</p>
+  <p class="stars" aria-label={`${review.rating} out of 5 stars`} set:html={starsHtml} />
   <blockquote>
     <p>"{review.text}"</p>
   </blockquote>
@@ -20,7 +20,7 @@ const stars = "\u2605".repeat(review.rating);
 <style>
   .review-card {
     display: grid;
-    gap: 0.68rem;
+    gap: 0.78rem;
     border-top: 4px solid #e7d2b7;
   }
 
@@ -28,7 +28,7 @@ const stars = "\u2605".repeat(review.rating);
     margin: 0;
     color: #b97742;
     font-size: 1rem;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.16em;
     font-weight: 700;
   }
 
@@ -36,6 +36,8 @@ const stars = "\u2605".repeat(review.rating);
     margin: 0;
     color: #274057;
     font-style: italic;
+    font-size: 1.02rem;
+    line-height: 1.72;
   }
 
   blockquote p {
@@ -46,8 +48,8 @@ const stars = "\u2605".repeat(review.rating);
     margin: 0;
     color: #3f5770;
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
   }
 </style>

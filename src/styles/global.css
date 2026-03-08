@@ -1,22 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Source+Sans+3:wght@400;500;600;700&display=swap");
 
 :root {
-  --color-bg: #f6f9fc;
+  --color-bg: #f4f8fb;
   --color-surface: #ffffff;
-  --color-text: #102334;
-  --color-muted: #4b6075;
-  --color-primary: #123b61;
-  --color-primary-strong: #0d2f4e;
-  --color-accent: #c28653;
-  --color-border: #d5e0ea;
-  --color-soft: #edf3f8;
-  --color-soft-strong: #e4edf5;
-  --shadow-sm: 0 4px 12px rgb(16 35 52 / 7%);
-  --shadow-md: 0 14px 30px rgb(16 35 52 / 12%);
-  --shadow-lg: 0 22px 44px rgb(13 47 78 / 20%);
+  --color-text: #112438;
+  --color-muted: #51667b;
+  --color-primary: #163f66;
+  --color-primary-strong: #0d2f4d;
+  --color-accent: #c18a58;
+  --color-accent-soft: #f2e3d3;
+  --color-border: #d3dee9;
+  --color-soft: #edf3f7;
+  --color-soft-strong: #e5edf4;
+  --color-ink-soft: #21384e;
+  --shadow-sm: 0 6px 16px rgb(16 35 52 / 6%);
+  --shadow-md: 0 16px 36px rgb(16 35 52 / 11%);
+  --shadow-lg: 0 28px 52px rgb(13 47 78 / 18%);
   --radius-sm: 0.55rem;
-  --radius-md: 0.95rem;
-  --radius-lg: 1.25rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.45rem;
 }
 
 * {
@@ -31,9 +33,13 @@ body {
   margin: 0;
   font-family: "Source Sans 3", "Segoe UI", Tahoma, sans-serif;
   color: var(--color-text);
-  background: linear-gradient(180deg, #fff 0%, var(--color-bg) 42%, var(--color-bg) 100%);
-  line-height: 1.65;
-  font-size: 1.03rem;
+  background:
+    radial-gradient(circle at top left, rgb(226 237 246 / 90%) 0, transparent 30%),
+    linear-gradient(180deg, #fff 0%, var(--color-bg) 43%, var(--color-bg) 100%);
+  line-height: 1.7;
+  font-size: 1.04rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 main {
@@ -45,28 +51,33 @@ h2,
 h3,
 h4 {
   font-family: "Merriweather", Georgia, serif;
-  line-height: 1.22;
+  line-height: 1.18;
   margin: 0;
   color: #0f2b44;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.1rem, 3.8vw, 3.25rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(2.25rem, 4.1vw, 3.65rem);
+  letter-spacing: -0.018em;
 }
 
 h2 {
-  font-size: clamp(1.65rem, 2.75vw, 2.25rem);
-  letter-spacing: -0.008em;
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  letter-spacing: -0.012em;
 }
 
 h3 {
-  font-size: clamp(1.22rem, 2vw, 1.52rem);
+  font-size: clamp(1.18rem, 1.9vw, 1.48rem);
+}
+
+h4 {
+  font-size: 1.05rem;
 }
 
 p {
   margin: 0;
+  max-width: 68ch;
 }
 
 a {
@@ -86,35 +97,38 @@ img {
 }
 
 .container {
-  width: min(1140px, 92vw);
+  width: min(1160px, 92vw);
   margin-inline: auto;
 }
 
 .section {
-  padding: clamp(3.25rem, 5.6vw, 5.65rem) 0;
+  position: relative;
+  padding: clamp(3.5rem, 6vw, 6.15rem) 0;
 }
 
 .section-alt {
-  background: linear-gradient(180deg, var(--color-soft) 0%, #f4f8fb 100%);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 38%) 0%, rgb(255 255 255 / 0%) 18%),
+    linear-gradient(180deg, var(--color-soft) 0%, #f4f8fb 100%);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
 
 .section-title {
-  margin-bottom: 0.85rem;
-  max-width: 24ch;
+  margin-bottom: 0.95rem;
+  max-width: 22ch;
 }
 
 .section-lead {
   max-width: 70ch;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.95rem;
   color: var(--color-muted);
-  font-size: clamp(1.03rem, 1.15vw, 1.16rem);
+  font-size: clamp(1.04rem, 1.18vw, 1.2rem);
 }
 
 .grid {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.35rem;
 }
 
 .grid-2 {
@@ -134,13 +148,20 @@ img {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
-  padding: 1.4rem;
+  padding: 1.55rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #c8d7e5;
 }
 
 .card h2,
 .card h3,
 .card h4 {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
 }
 
 .card p {
@@ -150,15 +171,15 @@ img {
 .badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid #b6cbe0;
+  border: 1px solid #bfd0e1;
   border-radius: 999px;
-  background: #ebf3fb;
-  color: #0f385d;
+  background: linear-gradient(180deg, #f4f8fc 0%, #eaf2f9 100%);
+  color: #133d63;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.055em;
   font-size: 0.78rem;
   text-transform: uppercase;
-  padding: 0.34rem 0.74rem;
+  padding: 0.38rem 0.78rem;
 }
 
 .btn-row {
@@ -173,11 +194,11 @@ img {
   justify-content: center;
   border: 1px solid transparent;
   border-radius: 999px;
-  min-height: 2.85rem;
-  padding: 0.68rem 1.2rem;
+  min-height: 3rem;
+  padding: 0.72rem 1.26rem;
   font-weight: 700;
-  font-size: 0.96rem;
-  letter-spacing: 0.01em;
+  font-size: 0.97rem;
+  letter-spacing: 0.015em;
   text-decoration: none;
   transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease,
     border-color 160ms ease;
@@ -188,26 +209,26 @@ img {
 }
 
 .btn-primary {
-  background: var(--color-primary);
+  background: linear-gradient(180deg, #1a4770 0%, var(--color-primary) 100%);
   color: #fff;
-  box-shadow: 0 6px 14px rgb(18 59 97 / 24%);
+  box-shadow: 0 10px 22px rgb(22 63 102 / 18%);
 }
 
 .btn-primary:hover {
-  background: var(--color-primary-strong);
+  background: linear-gradient(180deg, #143e65 0%, var(--color-primary-strong) 100%);
   color: #fff;
-  box-shadow: 0 10px 20px rgb(13 47 78 / 32%);
+  box-shadow: 0 14px 24px rgb(13 47 78 / 24%);
 }
 
 .btn-secondary {
-  background: #fff;
-  border-color: #9cb7cf;
+  background: linear-gradient(180deg, #fff 0%, #f8fbfd 100%);
+  border-color: #9fb9cf;
   color: var(--color-primary-strong);
 }
 
 .btn-secondary:hover {
-  border-color: #7ea4c5;
-  background: #f4f8fc;
+  border-color: #82a8c7;
+  background: #f3f8fc;
 }
 
 .btn-block {
@@ -222,7 +243,7 @@ img {
 
 .list-check li {
   position: relative;
-  margin-bottom: 0.62rem;
+  margin-bottom: 0.68rem;
   padding-left: 1.5rem;
 }
 
@@ -230,20 +251,22 @@ img {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.45rem;
-  width: 0.74rem;
-  height: 0.74rem;
+  top: 0.44rem;
+  width: 0.72rem;
+  height: 0.72rem;
   border-radius: 999px;
-  background: linear-gradient(140deg, #1b4c77 0%, #153b60 100%);
-  box-shadow: 0 0 0 3px #e5eef6;
+  background: linear-gradient(140deg, #245682 0%, #173e63 100%);
+  box-shadow: 0 0 0 3px #e8f0f7;
 }
 
 .panel {
-  background: linear-gradient(155deg, #0f3f67 0%, #0c2c49 100%);
+  background:
+    radial-gradient(circle at top right, rgb(255 255 255 / 10%) 0, transparent 28%),
+    linear-gradient(155deg, #143f65 0%, #0b2c46 100%);
   border-radius: var(--radius-lg);
   color: #edf4fc;
   border: 1px solid rgb(255 255 255 / 20%);
-  padding: clamp(1.5rem, 3vw, 2.45rem);
+  padding: clamp(1.65rem, 3vw, 2.65rem);
   box-shadow: var(--shadow-lg);
 }
 
@@ -260,16 +283,16 @@ img {
 .split {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: clamp(1.4rem, 4vw, 2.6rem);
+  gap: clamp(1.5rem, 4vw, 2.9rem);
   align-items: start;
 }
 
 .eyebrow {
-  margin-bottom: 0.78rem;
+  margin-bottom: 0.86rem;
   color: #2d5b80;
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.095em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
@@ -309,9 +332,10 @@ textarea {
   width: 100%;
   border: 1px solid #a6bdd2;
   border-radius: 0.62rem;
-  padding: 0.72rem 0.82rem;
+  padding: 0.78rem 0.88rem;
   color: var(--color-text);
   background: #fff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 65%);
 }
 
 input:hover,
@@ -356,9 +380,33 @@ details summary {
   border: 0;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content,
+  .hero-panel,
+  .page-hero-inner {
+    animation: rise-in 0.65s ease both;
+  }
+
+  .hero-panel {
+    animation-delay: 90ms;
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 @media (max-width: 980px) {
   .section {
-    padding: clamp(2.7rem, 5.5vw, 4.25rem) 0;
+    padding: clamp(2.9rem, 5.5vw, 4.55rem) 0;
   }
 
   .grid-3,
@@ -380,6 +428,10 @@ details summary {
   .grid-3,
   .grid-4 {
     grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1.25rem;
   }
 
   .btn-row .btn,

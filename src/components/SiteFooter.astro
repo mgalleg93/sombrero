@@ -9,6 +9,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container footer-grid">
     <section>
+      <p class="footer-label">Local Residential Painting</p>
       <h3>{business.name}</h3>
       <p>{business.foundedMessage}</p>
       <p class="seo-line">{business.serviceAreaSummary}</p>
@@ -48,26 +49,37 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    margin-top: 2.5rem;
-    background: linear-gradient(165deg, #0d2740 0%, #0a2238 100%);
+    margin-top: 2.75rem;
+    background:
+      radial-gradient(circle at top right, rgb(255 255 255 / 6%) 0, transparent 25%),
+      linear-gradient(165deg, #0d2740 0%, #0a2238 100%);
     color: #e8f1fb;
   }
 
   .footer-grid {
-    padding: 3rem 0 2.35rem;
+    padding: 3.35rem 0 2.45rem;
     display: grid;
     grid-template-columns: 1.35fr 1fr 1fr;
-    gap: 1.6rem;
+    gap: 1.9rem;
+  }
+
+  .footer-label {
+    margin-bottom: 0.45rem;
+    color: #9fbcd6;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 0.74rem;
   }
 
   .site-footer h3 {
     color: #fff;
-    margin-bottom: 0.78rem;
-    font-size: 1.08rem;
+    margin-bottom: 0.82rem;
+    font-size: 1.12rem;
   }
 
   .site-footer p {
-    margin-bottom: 0.82rem;
+    margin-bottom: 0.86rem;
     color: #d6e4f0;
     max-width: 42ch;
   }
@@ -82,7 +94,7 @@ const year = new Date().getFullYear();
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 0.42rem;
+    gap: 0.48rem;
   }
 
   .site-footer li a {
@@ -99,14 +111,14 @@ const year = new Date().getFullYear();
   }
 
   .footer-note {
-    margin-top: 0.92rem;
+    margin-top: 1rem;
     font-size: 0.95rem;
     color: #c9d9e8;
   }
 
   .footer-bar {
-    border-top: 1px solid rgb(255 255 255 / 16%);
-    padding: 0.92rem 0;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    padding: 1rem 0;
   }
 
   .footer-bar-row {
@@ -126,7 +138,7 @@ const year = new Date().getFullYear();
   .footer-call {
     border: 1px solid #5f84a7;
     border-radius: 999px;
-    padding: 0.42rem 0.76rem;
+    padding: 0.48rem 0.82rem;
     text-decoration: none;
     font-weight: 700;
     color: #f5faff;
@@ -141,8 +153,8 @@ const year = new Date().getFullYear();
   @media (max-width: 900px) {
     .footer-grid {
       grid-template-columns: 1fr;
-      gap: 1.35rem;
-      padding: 2.3rem 0 1.95rem;
+      gap: 1.45rem;
+      padding: 2.45rem 0 2.05rem;
     }
   }
 </style>

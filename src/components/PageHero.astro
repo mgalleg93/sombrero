@@ -18,13 +18,19 @@ const { eyebrow, title, subtitle } = Astro.props;
 
 <style>
   .page-hero {
-    background: linear-gradient(165deg, #eaf2f8 0%, #f5f9fc 62%, #fff 100%);
+    background:
+      radial-gradient(circle at 14% 0%, #e4eef7 0, transparent 34%),
+      linear-gradient(165deg, #e9f1f7 0%, #f5f9fc 62%, #fff 100%);
     border-bottom: 1px solid #d7e4ee;
   }
 
+  .page-hero-inner {
+    max-width: 48rem;
+  }
+
   .page-hero-inner h1 {
-    max-width: 20ch;
-    margin-bottom: 0.82rem;
+    max-width: 18ch;
+    margin-bottom: 0.9rem;
   }
 
   .page-hero-lead {
